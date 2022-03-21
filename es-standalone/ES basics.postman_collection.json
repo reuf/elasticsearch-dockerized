@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "9bab87b5-e462-4ab4-91f2-5f4b433adff4",
+		"name": "ES basics",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Put hotels index",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"settings\":{\n      \"number_of_shards\":1\n   }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put 1st hotel",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\":\"Golden star hotel\",\n   \"stars\":5,\n   \"location\":{\n      \"lat\":\"52.229675\",\n      \"lon\":\"21.012230\"\n   },\n   \"info\":{\n      \"age\":7,\n      \"facilities\":[\n         \"parking\",\n         \"restaurant\",\n         \"wifi\"\n      ]\n   },\n   \"created_at\":\"2014/05/01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put 2d hotel",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\":\"Silver star hotel\",\n   \"stars\":4,\n   \"location\":{\n      \"lat\":\"52.229675\",\n      \"lon\":\"21.007852\"\n   },\n   \"info\":{\n      \"age\":9,\n      \"facilities\":[\n         \"parking\",\n         \"wifi\"\n      ]\n   },\n   \"created_at\":\"2012/02/01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put 3d hotel",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\":\"Simple star hotel\",\n   \"stars\":2,\n   \"location\":{\n      \"lat\":\"51.773097\",\n      \"lon\":\"19.410553\"\n   },\n   \"info\":{\n      \"age\":10,\n      \"facilities\":[\n         \"parking\",\n         \"restaurant\"\n      ]\n   },\n   \"created_at\":\"2011/05/01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete hotels index",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9201/hotels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "match hotel name",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"match\": {\n      \"name\": \"Golden\"\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "count hotel documents",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"match_all\": {}\n    }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/_count/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"_count",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

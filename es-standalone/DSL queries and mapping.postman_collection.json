@@ -1,0 +1,720 @@
+{
+	"info": {
+		"_postman_id": "6e201957-6cad-4c53-97e9-ae7ea09fa452",
+		"name": "DSL queries and mapping",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "match all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"match_all\": {}\n    }\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "match star in the name",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"_source\": [\"name\"],   \n  \"query\": { \n    \"match\": {\n      \"name\": \"star\"\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "match date",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n  \"query\": { \n    \"match\": {\n      \"created_at\": \"2014/05/01\"\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "match facilities",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n  \"query\": { \n    \"match\": {\n      \"info.facilities\": \"wifi\"\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "multi match",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n  \"query\": { \n    \"multi_match\": {\n        \"query\":    \"wifi simple\",\n        \"fields\":   [\"name\", \"info.facilities\"]\n    } \n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "range",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n  \"query\": { \n    \"range\": {\n        \"info.age\": {\n            \"gte\":  6,\n            \"lt\":   9\n        }\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "term",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n  \"query\": { \n    \"term\": {\n      \"info.age\": 7\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "terms",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n  \"query\": { \n    \"terms\": {\n      \"info.facilities\": [\"restaurant\", \"wifi\"]\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "geo distance",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"filter\": {\n        \"geo_distance\": {\n          \"distance\": \"1km\", \n          \"location\": { \n            \"lat\":  51.77,\n            \"lon\": 19.41\n          }\n        }\n      }\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels/hotel/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels",
+						"hotel",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test index 1st attempt",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"created_at\":\"2014/05-01\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/test_index/test_type/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"test_index",
+						"test_type",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "match date - at test index",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n  \"query\": { \n    \"match\": {\n      \"created_at\": \"2014-05/01\"\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/test_index/test_type/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"test_index",
+						"test_type",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "range date - at test index",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n  \"query\": { \n    \"range\": {\n        \"created_at\": {\n            \"gt\":  \"2014/04-01\",\n            \"lt\":  \"2014/06-01\"\n        }\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/test_index/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"test_index",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test index - fix the problem - 1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"settings\":{\n      \"number_of_shards\":1\n   }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/test_index",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"test_index"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test index - fix the problem - 2",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"properties\": {\n        \"created_at\": {\n            \"type\": \"date\",\n            \"format\": \"yyyy/MM-dd\"\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/test_index/_mapping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"test_index",
+						"_mapping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test index 2d attempt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"created_at\":\"2014/05-01\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/test_index/_doc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"test_index",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create hotels2 index",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"settings\":{\n      \"number_of_shards\":1\n   }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add mapping to hotel2 index",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"properties\": {\n        \"name\": {\n            \"type\": \"text\",\n            \"fields\": {\n                \"keyword\": {\n                    \"ignore_above\": 256,\n                    \"type\": \"keyword\"\n                }\n            }\n        },\n        \"created_at\": {\n            \"format\": \"yyyy/MM/dd HH:mm:ss||yyyy/MM/dd||epoch_millis\",\n            \"type\": \"date\"\n        },\n        \"location\": {\n            \"type\": \"geo_point\"\n        },\n        \"stars\": {\n            \"type\": \"integer\"\n        },\n        \"info\": {\n            \"properties\": {\n                \"facilities\": {\n                    \"type\": \"text\"\n                },\n                \"age\": {\n                    \"type\": \"integer\"\n                }\n            }\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels2/_mapping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels2",
+						"_mapping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put 1st hotel",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\":\"Golden star hotel\",\n   \"stars\":5,\n   \"location\":{\n      \"lat\":\"52.229675\",\n      \"lon\":\"21.012230\"\n   },\n   \"info\":{\n      \"age\":7,\n      \"facilities\":[\n         \"parking\",\n         \"restaurant\",\n         \"wifi\"\n      ]\n   },\n   \"created_at\":\"2014/05/01\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels2/_doc/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels2",
+						"_doc",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put 2d hotel",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\":\"Silver star hotel\",\n   \"stars\":4,\n   \"location\":{\n      \"lat\":\"52.229675\",\n      \"lon\":\"21.007852\"\n   },\n   \"info\":{\n      \"age\":9,\n      \"facilities\":[\n         \"parking\",\n         \"wifi\"\n      ]\n   },\n   \"created_at\":\"2012/02/01\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels2/_doc/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels2",
+						"_doc",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put 3d hotel",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\":\"Simple star hotel\",\n   \"stars\":2,\n   \"location\":{\n      \"lat\":\"51.773097\",\n      \"lon\":\"19.410553\"\n   },\n   \"info\":{\n      \"age\":10,\n      \"facilities\":[\n         \"parking\",\n         \"restaurant\"\n      ]\n   },\n   \"created_at\":\"2011/05/01\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels2/_doc/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels2",
+						"_doc",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "geo distance - again",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"filter\": {\n        \"geo_distance\": {\n          \"distance\": \"1km\", \n          \"location\": { \n            \"lat\":  51.77,\n            \"lon\": 19.41\n          }\n        }\n      }\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels2/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels2",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

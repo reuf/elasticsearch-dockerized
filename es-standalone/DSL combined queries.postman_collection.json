@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "b5b9a070-6be3-4a75-8c15-7f176882c6a1",
+		"name": "DSL combined queries",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hotel query",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"from\": 0,\n    \"size\": 10,\n    \"query\": {\n        \"bool\": {\n            \"must_not\": {\n                \"match\": {\n                    \"name\": \"simple\"\n                }\n            },\n            \"must\": [\n                {\n                    \"range\": {\n                        \"stars\": {\n                            \"gte\": 4\n                        }\n                    }\n                },\n                {\n                    \"bool\": {\n                        \"should\": [\n                            {\n                                \"match\": {\n                                    \"name\": \"golden\"\n                                }\n                            },\n                            {\n                                \"match\": {\n                                    \"name\": \"silver\"\n                                }\n                            }\n                        ]\n                    }\n                }\n            ],\n            \"should\": [\n                {\n                    \"match\": {\n                        \"info.facilities\": \"restraunt\"\n                    }\n                },\n                {\n                    \"range\": {\n                        \"info.age\": {\n                            \"lt\": 9\n                        }\n                    }\n                }\n            ],\n            \"filter\": {\n                \"geo_distance\": {\n                    \"distance\": \"30km\",\n                    \"location\": {\n                        \"lat\": 52.22,\n                        \"lon\": 21\n                    }\n                }\n            }\n        }\n    },\n    \"sort\": [\n        {\n            \"_score\": {\n                \"order\": \"desc\"\n            }\n        },\n        {\n            \"name.keyword\": {\n                \"order\": \"desc\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels2/_search/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels2",
+						"_search",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hotel query - explain",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"bool\": {\n            \"must_not\": {\n                \"match\": {\n                    \"name\": \"simple\"\n                }\n            },\n            \"must\": [\n                {\n                    \"range\": {\n                        \"stars\": {\n                            \"gte\": 4\n                        }\n                    }\n                },\n                {\n                    \"bool\": {\n                        \"should\": [\n                            {\n                                \"match\": {\n                                    \"name\": \"golden\"\n                                }\n                            },\n                            {\n                                \"match\": {\n                                    \"name\": \"silver\"\n                                }\n                            }\n                        ]\n                    }\n                }\n            ],\n            \"should\": [\n                {\n                    \"match\": {\n                        \"info.facilities\": \"restraunt\"\n                    }\n                },\n                {\n                    \"range\": {\n                        \"info.age\": {\n                            \"lt\": 9\n                        }\n                    }\n                }\n            ],\n            \"filter\": {\n                \"geo_distance\": {\n                    \"distance\": \"30km\",\n                    \"location\": {\n                        \"lat\": 52.22,\n                        \"lon\": 21\n                    }\n                }\n            }\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9201/hotels2/_explain/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9201",
+					"path": [
+						"hotels2",
+						"_explain",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
